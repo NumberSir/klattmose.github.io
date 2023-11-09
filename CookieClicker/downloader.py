@@ -34,7 +34,9 @@ def parseIndex(fname, dir, baseURL):
 				pos = line.find("a href=\"") + 8
 				if pos > 8:
 					href = line[pos : line.find("\"", pos)]
-					downloadFile(baseURL + dir + "/" + href, os.path.realpath("Download/" + dir + "/" + href))
+					downloadFile(
+						baseURL + dir + "/" + href, os.path.realpath(f"Download/{dir}/{href}")
+					)
 			line = fp.readline()
 			cnt += 1
 #
@@ -55,8 +57,8 @@ directories = config.getElementsByTagName("directory")
 for directory in directories:
 	dir = directory.childNodes[0].data
 	createFolder(os.path.realpath("Download" + '/'+ dir))
-	downloadFile(baseURL + dir, os.path.realpath("./Download/" + dir + "/index.html"))
+	downloadFile(baseURL + dir, os.path.realpath(f"./Download/{dir}/index.html"))
 	# print(baseURL + dir)
 	# print(os.path.realpath("./Download/" + dir + "/index.html"))
-	parseIndex(os.path.realpath("./Download/" + dir + "/index.html"), dir, baseURL)
+	parseIndex(os.path.realpath(f"./Download/{dir}/index.html"), dir, baseURL)
 #
